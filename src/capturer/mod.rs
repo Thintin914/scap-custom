@@ -99,6 +99,10 @@ impl Capturer {
         self.rx.recv()
     }
 
+    pub fn try_get_next_frame(&self) -> Result<Frame, mpsc::TryRecvError> {
+        self.rx.try_recv()
+    }
+
     /// Get the dimensions the frames will be captured in
     pub fn get_output_frame_size(&mut self) -> [u32; 2] {
         self.engine.get_output_frame_size()
