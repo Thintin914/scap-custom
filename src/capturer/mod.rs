@@ -100,7 +100,7 @@ impl Capturer {
     }
 
     pub fn try_get_next_frame(&self) -> Result<Frame, mpsc::TryRecvError> {
-        self.rx.try_recv()
+        self.rx.try_iter().last().ok_or(mpsc::TryRecvError::Empty)
     }
 
     /// Get the dimensions the frames will be captured in
